@@ -16,8 +16,8 @@ public class TreeViewBuilder {
 	
 	public static JTree createTreeView(Drawable drawable, TreeSelectCallBack selectCallBack)
 	{
-		DefaultMutableTreeNode tree = new DefaultMutableTreeNode( new DrawableInfo ("Object Info", drawable));
-		populateTreeViewRecursive(tree, drawable);
+		//null; //new DefaultMutableTreeNode( new DrawableInfo ("Object Info", drawable));
+		DefaultMutableTreeNode tree = populateTreeViewRecursive(null, drawable);
 				
 		JTree jTree = new JTree(tree);
 		jTree.getSelectionModel().setSelectionMode (TreeSelectionModel.SINGLE_TREE_SELECTION);
@@ -33,25 +33,30 @@ public class TreeViewBuilder {
 		return jTree;
 	}
 	
-	private static void populateTreeViewRecursive(DefaultMutableTreeNode parentNode, Drawable drawable)
+	private static DefaultMutableTreeNode populateTreeViewRecursive(DefaultMutableTreeNode parentNode, Drawable drawable)
 	{
+		DefaultMutableTreeNode newSubTreeNode;
+		if(parentNode == null)
+		{
+			parentNode = new DefaultMutableTreeNode(new DrawableInfo(drawable.getName(), drawable));
+			newSubTreeNode = parentNode;
+		}
+		else
+		{
+			newSubTreeNode = new DefaultMutableTreeNode(new DrawableInfo(drawable.getName(), drawable));
+			parentNode.add(newSubTreeNode);
+		}
+		
 		if (drawable.getClass() == DrawableParent.class)
 		{
-			DrawableParent parent = (DrawableParent) drawable;
-			DefaultMutableTreeNode newSubTreeNode = new DefaultMutableTreeNode(new DrawableInfo(drawable.getName(), parent));
-			parentNode.add(newSubTreeNode);
-			
+			DrawableParent parent = (DrawableParent) drawable;		
 			for(Drawable drawableChild : parent.getDrawableChildren())
 			{
 				populateTreeViewRecursive(newSubTreeNode, drawableChild);
 			}
 		}
-		else
-		{
-			String objectName = drawable.getClass().getSimpleName();
-			DefaultMutableTreeNode newSubTreeNode = new DefaultMutableTreeNode(new DrawableInfo(drawable.getName(), drawable));
-			parentNode.add(newSubTreeNode);
-		}
+
+		return parentNode;
 	}
 	
 	private static void expandAllNodes(JTree tree, int startingIndex, int rowCount){

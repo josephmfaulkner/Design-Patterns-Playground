@@ -90,7 +90,6 @@ public class MainWindow  {
 
 		@Override
 		public void callback(DrawableInfo drawableInfo) {
-			System.out.println(drawableInfo.name);
 			drawableMoveReference = drawableInfo.drawable;			
 		}
 		
