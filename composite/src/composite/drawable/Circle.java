@@ -3,36 +3,35 @@ package composite.drawable;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Circle implements Drawable {
+public class Circle extends Drawable {
 	
-	private int x, y, diameter;
-	private Color color;
+	private int diameter;
 	
 	public Circle(int x, int y, int radius)
 	{
-		this.x = x;
-		this.y = y;
+		super(x, y);
 		this.diameter = radius * 2;
-		this.color = Color.GRAY;
 	}
 	
 	public Circle(int x, int y, int radius, Color color)
 	{
-		this.x = x;
-		this.y = y;
+		super(x, y, color);
 		this.diameter = radius * 2;
-		this.color = color;
 	}
 	
+	@Override
 	public void move(int deltX, int deltY)
 	{
 		this.x += deltX;
 		this.y += deltY;
 	}
 	
+	@Override
 	public void render(Graphics graphics)
 	{
 		graphics.setColor(this.color);
 		graphics.fillOval(x, y, this.diameter, this.diameter);	
+	
+
 	}
 }

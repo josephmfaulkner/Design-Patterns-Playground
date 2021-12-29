@@ -2,7 +2,7 @@ package composite.drawable;
 
 import java.awt.Graphics;
 
-public class Triangle implements Drawable {
+public class Triangle extends Drawable {
 
 	@Override
 	public void move(int deltX, int deltY) {

@@ -38,7 +38,7 @@ public class TreeViewBuilder {
 		if (drawable.getClass() == DrawableParent.class)
 		{
 			DrawableParent parent = (DrawableParent) drawable;
-			DefaultMutableTreeNode newSubTreeNode = new DefaultMutableTreeNode(new DrawableInfo("Obj", parent));
+			DefaultMutableTreeNode newSubTreeNode = new DefaultMutableTreeNode(new DrawableInfo(drawable.getName(), parent));
 			parentNode.add(newSubTreeNode);
 			
 			for(Drawable drawableChild : parent.getDrawableChildren())
@@ -48,8 +48,8 @@ public class TreeViewBuilder {
 		}
 		else
 		{
-			String objectName = drawable.getClass().getName();
-			DefaultMutableTreeNode newSubTreeNode = new DefaultMutableTreeNode(new DrawableInfo(objectName, drawable));
+			String objectName = drawable.getClass().getSimpleName();
+			DefaultMutableTreeNode newSubTreeNode = new DefaultMutableTreeNode(new DrawableInfo(drawable.getName(), drawable));
 			parentNode.add(newSubTreeNode);
 		}
 	}

@@ -2,7 +2,7 @@ package composite.drawable;
 
 import java.awt.Graphics;
 
-public class Rectangle implements Drawable {
+public class Rectangle extends Drawable {
 
 	@Override
 	public void move(int deltX, int deltY) {

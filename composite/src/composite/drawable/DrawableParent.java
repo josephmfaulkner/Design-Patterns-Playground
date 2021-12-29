@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.util.List;
 import java.util.Vector;
 
-public class DrawableParent implements Drawable {
+public class DrawableParent extends Drawable {
 
 	private List<Drawable> drawableChildren;
 	
