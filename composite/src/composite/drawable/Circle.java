@@ -20,18 +20,9 @@ public class Circle extends Drawable {
 	}
 	
 	@Override
-	public void move(int deltX, int deltY)
-	{
-		this.x += deltX;
-		this.y += deltY;
-	}
-	
-	@Override
 	public void render(Graphics graphics)
 	{
 		graphics.setColor(this.color);
 		graphics.fillOval(x, y, this.diameter, this.diameter);	
-	
-
 	}
 }

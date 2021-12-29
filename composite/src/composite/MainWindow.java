@@ -27,6 +27,8 @@ import composite.drawable.Drawable;
 import composite.drawable.DrawableParent;
 import composite.drawable.examples.ColorCircles;
 import composite.drawable.examples.DrawableExample;
+import composite.drawable.examples.RectanglesAndSquares;
+import composite.drawable.examples.Triangles;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -50,7 +52,9 @@ public class MainWindow  {
 
 	private void createDrawable()
 	{
-		DrawableExample example = new ColorCircles();
+		//DrawableExample example = new ColorCircles();
+		DrawableExample example = new Triangles();
+		//DrawableExample example = new RectanglesAndSquares();
 		this.drawable = example.setup();
 		this.drawableMoveReference = drawable;
 	}

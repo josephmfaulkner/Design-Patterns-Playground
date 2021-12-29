@@ -38,7 +38,13 @@ public abstract class Drawable {
 	
 	
 	
-	abstract public void move(int deltX, int deltY);
+	public void move(int deltX, int deltY)
+	{
+		this.x += deltX;
+		this.y += deltY;
+	}
+	
+	
 	abstract public void render(Graphics graphics);
 	
 	public void setName(String name)
