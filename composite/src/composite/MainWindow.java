@@ -25,11 +25,13 @@ import composite.controls.TreeViewControls;
 import composite.drawable.Circle;
 import composite.drawable.Drawable;
 import composite.drawable.DrawableParent;
+import composite.drawable.SelectionBox;
 import composite.drawable.examples.ColorCircles;
 import composite.drawable.examples.DrawableExample;
 import composite.drawable.examples.RectanglesAndSquares;
 import composite.drawable.examples.Snowman;
 import composite.drawable.examples.Triangles;
+import composite.drawable.util.Boundaries;
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -42,6 +44,9 @@ public class MainWindow  {
 	private JTree jTree;
 	private Drawable drawable;
 	private Drawable drawableMoveReference;
+	
+	private Boundaries boundaries;
+	private SelectionBox drawSelectionBox;
 	private AppCanvas canvas;
 
 	public MainWindow() {
@@ -60,11 +65,17 @@ public class MainWindow  {
 		
 		this.drawable = example.setup();
 		this.drawableMoveReference = drawable;
+		
+		boundaries = new Boundaries();
+		this.drawableMoveReference.setBoundaries(boundaries);
+		this.drawSelectionBox = new SelectionBox(boundaries);
+		this.drawSelectionBox.setColor(Color.RED);
+		
 	}
 	
 	private void setupControls()
 	{
-		canvas = new AppCanvas(this.drawable);
+		canvas = new AppCanvas(this.drawable, this.drawSelectionBox);
 		MouseDragControls mouseDragControls = new MouseDragControls(new MouseDrag());
 		canvas.addMouseListener(mouseDragControls.getMouseAdapter());
 	    canvas.addMouseMotionListener(mouseDragControls.getMouseMotionAdapter());
@@ -84,6 +95,7 @@ public class MainWindow  {
 	private void moveDrawing(int xDelt, int yDelt)
 	{
 		this.drawableMoveReference.move(xDelt, yDelt);
+		this.drawSelectionBox.move(xDelt, yDelt);
 		this.drawFrame();
 	}
 	
@@ -97,7 +109,16 @@ public class MainWindow  {
 
 		@Override
 		public void callback(DrawableInfo drawableInfo) {
-			drawableMoveReference = drawableInfo.drawable;			
+			drawableMoveReference = drawableInfo.drawable;
+			
+			Boundaries newBoundaries = new Boundaries();
+			drawableMoveReference.setBoundaries(newBoundaries);
+			
+			//System.out.println(newBoundaries);
+			
+			boundaries = newBoundaries;
+			drawSelectionBox.updateBoundaries(newBoundaries);
+			drawFrame();
 		}
 		
 	}

@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import composite.DrawableInfo;
+import composite.drawable.util.Boundaries;
 
 public abstract class Drawable {
 	
@@ -46,6 +47,12 @@ public abstract class Drawable {
 	
 	
 	abstract public void render(Graphics graphics);
+	abstract public void setBoundaries(Boundaries boundaries);
+	
+	public void setColor(Color color)
+	{
+		this.color = color;
+	}
 	
 	public void setName(String name)
 	{

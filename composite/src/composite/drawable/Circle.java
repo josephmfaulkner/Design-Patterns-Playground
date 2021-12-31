@@ -3,6 +3,8 @@ package composite.drawable;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import composite.drawable.util.Boundaries;
+
 public class Circle extends Drawable {
 	
 	private int diameter;
@@ -24,5 +26,11 @@ public class Circle extends Drawable {
 	{
 		graphics.setColor(this.color);
 		graphics.fillOval(x, y, this.diameter, this.diameter);	
+	}
+
+	@Override
+	public void setBoundaries(Boundaries boundaries) {
+		// TODO Auto-generated method stub
+		boundaries.updateBoundaries(this.y, this.y + diameter, this.x, this.x + diameter);
 	}
 }

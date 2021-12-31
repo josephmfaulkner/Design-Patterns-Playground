@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 import java.awt.geom.Point2D;
+import java.util.Arrays;
+
+import composite.drawable.util.Boundaries;
 
 
 public class Triangle extends Drawable {
@@ -24,12 +27,13 @@ public class Triangle extends Drawable {
 	private int xDrawCoords[] = new int[3];
 	private int yDrawCoords[] = new int[3];
 	
-	private int scale = 70;
+	private int scale;
 	
 	public Triangle(double offsetTheta, double scale, Color color)
 	{
 		x = 0;
 		y = 0;
+		this.scale = (int) scale;
 		double deltaPi = 2 * Math.PI / 3;
 		for(int i = 0; i < 3; i++)
 		{
@@ -61,6 +65,24 @@ public class Triangle extends Drawable {
 		
 		graphics.setColor(this.color);
 		graphics.fillPolygon(xDrawCoords, yDrawCoords, 3);
+	}
+
+	@Override
+	public void setBoundaries(Boundaries boundaries) {
+		// TODO Auto-generated method stub
+		
+		int[] xDrawCoordsSort = {xDrawCoords[0],xDrawCoords[1],xDrawCoords[2]};
+		int[] yDrawCoordsSort = {yDrawCoords[0],yDrawCoords[1],yDrawCoords[2]};
+		
+		Arrays.sort(xDrawCoordsSort);
+		Arrays.sort(yDrawCoordsSort);
+		
+		int top = yDrawCoordsSort[0];
+		int bottom = yDrawCoordsSort[2];
+		int left = xDrawCoordsSort[0];
+		int right = xDrawCoordsSort[2];
+		
+		boundaries.updateBoundaries(top, bottom, left, right);
 	}
 
 }

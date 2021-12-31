@@ -10,9 +10,11 @@ import composite.drawable.Drawable;
 public class AppCanvas extends Canvas {
 
 	private Drawable drawable;
+	private Drawable selectionBox;
 	
-	AppCanvas(Drawable drawable){
+	AppCanvas(Drawable drawable, Drawable selectionBox){
 		this.drawable = drawable;
+		this.selectionBox = selectionBox;
 	}
 	
 	@Override
@@ -22,7 +24,7 @@ public class AppCanvas extends Canvas {
 		this.setForeground(Color.WHITE);
 				
 		drawable.render(graphics);
-
+		selectionBox.render(graphics);
 	}
 	
 }

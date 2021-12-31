@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.util.List;
 import java.util.Vector;
 
+import composite.drawable.util.Boundaries;
+
 public class DrawableParent extends Drawable {
 
 	private List<Drawable> drawableChildren;
@@ -43,6 +45,15 @@ public class DrawableParent extends Drawable {
 		for(Drawable drawable: this.drawableChildren)
 		{
 			drawable.render(graphics);
+		}
+	}
+
+	@Override
+	public void setBoundaries(Boundaries boundaries) {
+		// TODO Auto-generated method stub
+		for(Drawable drawable: this.drawableChildren)
+		{
+			drawable.setBoundaries(boundaries);
 		}
 	}
 	

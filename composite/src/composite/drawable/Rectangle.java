@@ -3,6 +3,8 @@ package composite.drawable;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import composite.drawable.util.Boundaries;
+
 public class Rectangle extends Drawable {
 
 	private int height, width;
@@ -35,6 +37,12 @@ public class Rectangle extends Drawable {
 	public void render(Graphics graphics) {
 		graphics.setColor(this.color);
 		graphics.fillRect(this.x, this.y, this.width, this.height);
+	}
+
+	@Override
+	public void setBoundaries(Boundaries boundaries) {
+		// TODO Auto-generated method stub
+		boundaries.updateBoundaries(y, y + height , x, x + width);
 	}
 
 }
